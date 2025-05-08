@@ -1,8 +1,8 @@
 [project]
-name = "python-template"
+name = "ft8ping"
 version = "0"
 readme = "README.md"
-description = "Lorem ipsum dolor sit amet"
+description = "ICMP over FT8"
 requires-python = ">=3.12"
 dependencies = [
     "structlog",

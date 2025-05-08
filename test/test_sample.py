@@ -1,4 +1,4 @@
-from python_template import skeleton
+from ft8ping import skeleton
 
 
 def test_nothing():
