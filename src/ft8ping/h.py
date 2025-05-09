@@ -1,5 +1,3 @@
-import sys
-
 """
 Python port of ft4_ft8_public/hashcodes.f90,
 public domain software (per https://wsjt.sourceforge.io/FT4_FT8_QEX.pdf)
@@ -47,10 +45,7 @@ program hashcodes
 
 
 def main():
-    ntokens = 2063592
-    c = " 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ/"
-    nprime = 47055833459
-    nbits = [10, 12, 22]
+    import sys
 
     if len(sys.argv) != 2:
         print("Usage:    hashcodes <callsign>")
@@ -58,8 +53,23 @@ def main():
         print("          hashcodes YW18FIFA")
         return
 
+    callsign = sys.argv[1].lstrip()
+    h = hashcodes(callsign)
+
+    print("Callsign        h10       h12       h22")
+    print("-" * 41)
+    print(f"{callsign:<11}{h[0]:9}{h[1]:10}{h[2]:10}")
+    print(f"Biased for storage in c28:{h[3]:14}")
+
+
+def hashcodes(call: str):
+    ntokens = 2063592
+    c = " 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ/"
+    nprime = 47055833459
+    nbits = [10, 12, 22]
+
     # Get callsign and left-justify (equivalent to Fortran's adjustl)
-    callsign = sys.argv[1].lstrip().ljust(11)
+    callsign = call.ljust(11)
 
     n8 = [0, 0, 0]
     ihash = [0, 0, 0]
@@ -78,10 +88,7 @@ def main():
 
     ih22_biased = ihash[2] + ntokens
 
-    print("Callsign        h10       h12       h22")
-    print("-" * 41)
-    print(f"{callsign:<11}{ihash[0]:9}{ihash[1]:10}{ihash[2]:10}")
-    print(f"Biased for storage in c28:{ih22_biased:14}")
+    return (ihash[0], ihash[1], ihash[2], ih22_biased)
 
 
 if __name__ == "__main__":
