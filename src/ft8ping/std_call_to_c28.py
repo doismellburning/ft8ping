@@ -92,5 +92,5 @@ def std_call_to_c28(call: str):
     return n28
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     main()

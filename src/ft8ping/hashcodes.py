@@ -91,5 +91,5 @@ def hashcodes(call: str):
     return (ihash[0], ihash[1], ihash[2], ih22_biased)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     main()
