@@ -12,6 +12,7 @@ dependencies = [
 [project.scripts]
 hashcodes = "ft8ping.hashcodes:main"
 std_call_to_c28 = "ft8ping.std_call_to_c28:main"
+ft8ping = "ft8ping.ft8ping:main"
 
 [build-system]
 requires = ["hatchling"]
