@@ -1,5 +1,3 @@
-import sys
-
 """
 Python port of ft4_ft8_public/std_call_to_c28.f90,
 public domain software (per https://wsjt.sourceforge.io/FT4_FT8_QEX.pdf)
@@ -44,6 +42,20 @@ program std_call_to_c28
 
 
 def main():
+    import sys
+
+    if len(sys.argv) != 2:
+        print("Usage:   std_call_to_c28 <call_std>")
+        print("Example: std_call_to_c28 K1ABC")
+        return
+
+    call_std = sys.argv[1]
+    n28 = call_to_c28(call_std)
+
+    print(f"Callsign: {call_std}  c28 as decimal integer: {n28}")
+
+
+def call_to_c28(call: str):
     NTOKENS = 2063592
     MAX22 = 4194304
 
@@ -52,12 +64,7 @@ def main():
     a3 = "0123456789"
     a4 = " ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-    if len(sys.argv) != 2:
-        print("Usage:   std_call_to_c28 <call_std>")
-        print("Example: std_call_to_c28 K1ABC")
-        return
-
-    call_std = sys.argv[1].rjust(6)
+    call_std = call.rjust(6)
 
     # Fortran's index() returns position (1-based) or 0 if not found
     # Python's find() returns position (0-based) or -1 if not found
@@ -82,7 +89,7 @@ def main():
         + i6
     )
 
-    print(f"Callsign: {call_std}  c28 as decimal integer: {n28}")
+    return n28
 
 
 if __name__ == "__main__":
