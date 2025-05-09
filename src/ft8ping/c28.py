@@ -56,8 +56,8 @@ def main():
 
 
 def call_to_c28(call: str):
-    NTOKENS = 2063592
-    MAX22 = 4194304
+    ntokens = 2063592
+    max22 = 4194304
 
     a1 = " 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     a2 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -79,8 +79,8 @@ def call_to_c28(call: str):
     # Fortran: index()-1, Python: find() directly
 
     n28 = (
-        NTOKENS
-        + MAX22
+        ntokens
+        + max22
         + 36 * 10 * 27 * 27 * 27 * i1
         + 10 * 27 * 27 * 27 * i2
         + 27 * 27 * 27 * i3

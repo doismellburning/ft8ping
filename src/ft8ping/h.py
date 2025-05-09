@@ -47,7 +47,7 @@ program hashcodes
 
 
 def main():
-    NTOKENS = 2063592
+    ntokens = 2063592
     c = " 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ/"
     nprime = 47055833459
     nbits = [10, 12, 22]
@@ -76,7 +76,7 @@ def main():
         product = (nprime * n8[k]) & ((1 << 64) - 1)  # 64-bit mask
         ihash[k] = (product >> (64 - nbits[k])) & ((1 << nbits[k]) - 1)
 
-    ih22_biased = ihash[2] + NTOKENS
+    ih22_biased = ihash[2] + ntokens
 
     print("Callsign        h10       h12       h22")
     print("-" * 41)
