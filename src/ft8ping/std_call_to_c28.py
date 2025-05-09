@@ -50,12 +50,12 @@ def main():
         return
 
     call_std = sys.argv[1]
-    n28 = call_to_c28(call_std)
+    n28 = std_call_to_c28(call_std)
 
     print(f"Callsign: {call_std}  c28 as decimal integer: {n28}")
 
 
-def call_to_c28(call: str):
+def std_call_to_c28(call: str):
     ntokens = 2063592
     max22 = 4194304
 
