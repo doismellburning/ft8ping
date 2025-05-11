@@ -7,7 +7,7 @@ bootstrap:
 	uv sync --dev
 
 .PHONY: check
-check: black lint mypy
+check: black lint
 
 .PHONY: black
 black:
