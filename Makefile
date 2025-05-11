@@ -7,7 +7,7 @@ bootstrap:
 	uv sync --dev
 
 .PHONY: check
-check: black lint
+check: black lint ty
 
 .PHONY: black
 black:
@@ -20,6 +20,10 @@ lint:
 .PHONY: mypy
 mypy:
 	uv run mypy $(CODEDIRS)
+
+.PHONY: ty
+ty:
+	uv run ty check $(CODEDIRS)
 
 .PHONY: fix
 fix:

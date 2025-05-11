@@ -52,4 +52,5 @@ dev = [
     "mypy",
     "pytest",
     "ruff",
+    "ty>=0.0.0a8",
 ]

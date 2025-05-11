@@ -1,5 +1,5 @@
 import structlog
-from scapy.all import ICMP, raw
+from scapy.all import ICMP, raw  # ty: ignore[unresolved-import]
 
 from .hashcodes import hashcodes
 from .std_call_to_c28 import std_call_to_c28
@@ -7,7 +7,7 @@ from .std_call_to_c28 import std_call_to_c28
 log = structlog.get_logger()
 
 
-def make_icmp_fields(source: str, destination: str):
+def make_icmp_fields(source: str, destination: str) -> tuple[int, int, bytes]:
 
     encoded_source = std_call_to_c28(source)  # 28 bits
     log.info(
@@ -44,7 +44,7 @@ def make_icmp_fields(source: str, destination: str):
     return (id_val, seq_val, payload_val)
 
 
-def make_ping(source: str, destination: str):
+def make_ping(source: str, destination: str) -> ICMP:
     id_val, seq_val, payload_val = make_icmp_fields(source, destination)
 
     req = ICMP(id=id_val, seq=seq_val)
@@ -55,7 +55,7 @@ def make_ping(source: str, destination: str):
     return req
 
 
-def parse_ping(packet):
+def parse_ping(packet: ICMP) -> tuple[int, int]:
     id_val = packet.id
     seq_val = packet.seq
     payload_val = bytes(packet.payload)
@@ -63,7 +63,7 @@ def parse_ping(packet):
     return parse_fields(id_val, seq_val, payload_val)
 
 
-def parse_fields(id_val, seq_val, payload_val):
+def parse_fields(id_val: int, seq_val: int, payload_val: bytes) -> tuple[int, int]:
     source_c28 = (id_val << 12) | ((seq_val & 0xFFF0) >> 4)
     destination_h10 = ((seq_val & 0xF) << 6) | int.from_bytes(
         payload_val, "big"
