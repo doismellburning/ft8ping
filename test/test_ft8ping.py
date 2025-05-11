@@ -1,3 +1,5 @@
+from click.testing import CliRunner
+
 from ft8ping import ft8ping
 from ft8ping.hashcodes import hashcodes
 from ft8ping.std_call_to_c28 import std_call_to_c28
@@ -19,10 +21,7 @@ def test_invert():
 
 
 def test_main_no_args(capsys, monkeypatch):
-    with monkeypatch.context() as m:
-        m.setattr("sys.argv", ["ft8ping.py"])
-        ft8ping.main()
+    runner = CliRunner()
+    result = runner.invoke(ft8ping.main, "--source 2E0KGG --destination G4HSK")
 
-    out = capsys.readouterr().out
-
-    assert "packet" in out
+    assert "packet" in result.output
