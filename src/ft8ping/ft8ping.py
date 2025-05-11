@@ -1,3 +1,4 @@
+import click
 import structlog
 from scapy.all import ICMP, raw  # ty: ignore[unresolved-import]
 
@@ -72,8 +73,11 @@ def parse_fields(id_val: int, seq_val: int, payload_val: bytes) -> tuple[int, in
     return (source_c28, destination_h10)
 
 
-def main():
-    p = make_ping("2E0KGG", "G4HSK")
+@click.command()
+@click.option("--source", required=True, help="Source callsign, i.e. yours")
+@click.option("--destination", required=True, help="Destination callsign")
+def main(source, destination):
+    p = make_ping(source, destination)
     print(p)
 
 
