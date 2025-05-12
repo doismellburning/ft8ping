@@ -3,7 +3,7 @@ name = "ft8ping"
 version = "0"
 readme = "README.md"
 description = "ICMP over FT8"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 dependencies = [
     "click>=8.1.8",
     "scapy>=2.6.1",
