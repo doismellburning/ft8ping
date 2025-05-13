@@ -35,15 +35,22 @@ show_contexts = true
 line-length = 120
 
 [tool.ruff.lint]
-select = [
-	"F",  # pyflakes
-	"E", "W",  # pycodestyle
-	"C90",  # mccabe
-	"I",  # isort
-	"N",  # pep8-naming
-	"UP",  # pyupgrade
-	"B",  # flake8-bugbear
-	"INP",  # flake8-no-pep420
+select = ["ALL"]
+ignore = [
+    "ANN",  # I don't intend to annotate everything
+    "D",  # I like the desire to docstring everything and do it well, but no, not here
+    "FBT003",  # Sometimes boolean args are ok
+    "FIX001",  # Yes I have FIXMEs
+    "FIX002",  # Yes I have TODOs
+    "PLR0913",  # Yes sometimes I could do with fewer args to functions but it's ok
+    "PLR2004",  # I appreciate that magic numbers aren't great, but part of this project is just plain magical
+    "RET504",  # I will assign to a variable and return it if I want to
+    "RUF003",  # There's nothing wrong with en-dashen
+    "RUF005",  # I have considered [*foo, "bar", "baz"] and decided otherwise
+    "RUF021",  # Yes parenthesising things can be helpful but not if black will just remove them
+    "S",  # flake8-bandit complains about me using assert *in tests*
+    "T201",  # Sometimes print is ok
+    "TD",  # Please chill out about my TODOs
 ]
 
 [dependency-groups]

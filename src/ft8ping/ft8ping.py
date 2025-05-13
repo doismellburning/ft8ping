@@ -71,7 +71,8 @@ def parse_ping(packet: ICMP) -> tuple[int, int]:
 def parse_fields(id_val: int, seq_val: int, payload_val: bytes) -> tuple[int, int]:
     source_c28 = (id_val << 12) | ((seq_val & 0xFFF0) >> 4)
     destination_h10 = ((seq_val & 0xF) << 6) | int.from_bytes(
-        payload_val, "big"
+        payload_val,
+        "big",
     )  # FIXME
 
     return (source_c28, destination_h10)
@@ -115,7 +116,8 @@ def make_audio(telemetry_hex: str) -> Path:
 
     if "i3.n3: 0.5" not in result.stdout:  # pragma: no cover
         log.fatal(
-            "ft8sim possibly didn't create a telemetry packet?", stdout=result.stdout
+            "ft8sim possibly didn't create a telemetry packet?",
+            stdout=result.stdout,
         )
 
     filename = "000000_000001.wav"  # ft8sim default
@@ -141,7 +143,10 @@ def build_rigctl_command(radio_model: str, radio_device: str) -> list[str]:
 
 
 def transmit(
-    audio_filepath: Path, radio_model: str, radio_device: str, audio_device: str
+    audio_filepath: Path,
+    radio_model: str,
+    radio_device: str,
+    audio_device: str,
 ) -> None:
     # TODO This makes a *LOT* of assumptions about rig support and state etc...
     # TODO Dry run that just dumps command used?
@@ -181,7 +186,9 @@ def transmit(
 )
 @click.option("--radio-model", default="1", help="Radio model (see `rigctl --list`)")
 @click.option(
-    "--radio-device", default="/dev/radio", help="Radio device (e.g. `/dev/radio`)"
+    "--radio-device",
+    default="/dev/radio",
+    help="Radio device (e.g. `/dev/radio`)",
 )
 @click.option(
     "--audio-device",
