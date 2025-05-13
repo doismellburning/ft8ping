@@ -12,6 +12,7 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           enable-cache: true
+      - run: sudo apt install --yes wsjtx libhamlib-utils
       - run: make bootstrap
       - run: make check
       - run: make test
