@@ -4,7 +4,8 @@ from pathlib import Path
 
 import click
 import structlog
-from scapy.all import ICMP, raw  # ty: ignore[unresolved-import]
+from scapy.compat import raw
+from scapy.layers.inet import ICMP
 
 from .hashcodes import hashcodes
 from .std_call_to_c28 import std_call_to_c28

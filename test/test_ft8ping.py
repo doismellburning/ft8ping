@@ -2,7 +2,7 @@ import subprocess
 import tempfile
 
 from click.testing import CliRunner
-from scapy.all import ICMP  # ty: ignore[unresolved-import]
+from scapy.layers.inet import ICMP
 
 from ft8ping import ft8ping
 from ft8ping.hashcodes import hashcodes
