@@ -31,7 +31,7 @@ def test_main_default(fake_process):
 
     result = runner.invoke(
         ft8ping.main,
-        "--source 2E0KGG --destination G4HSK",
+        "send --source 2E0KGG --destination G4HSK",
     )
 
     assert result.exit_code == 0, result.output
@@ -45,11 +45,36 @@ def test_main_no_transmit(fake_process):
 
     result = runner.invoke(
         ft8ping.main,
-        "--source 2E0KGG --destination G4HSK --no-transmit",
+        "send --source 2E0KGG --destination G4HSK --no-transmit",
     )
 
     assert result.exit_code == 0, result.output
     assert "packet" in result.output
+
+
+def test_hashcodes():
+    runner = CliRunner()
+
+    result = runner.invoke(
+        ft8ping.main,
+        "hashcodes 2E0KGG",
+    )
+
+    assert result.exit_code == 0, result.output
+    assert "2E0KGG" in result.output
+
+
+def test_std_call_to_c28():
+    runner = CliRunner()
+
+    result = runner.invoke(
+        ft8ping.main,
+        "std_call_to_c28 2E0KGG",
+    )
+
+    assert result.exit_code == 0, result.output
+    assert "2E0KGG" in result.output
+    assert "30279371" in result.output
 
 
 def test_packet_to_telemetry_hex():

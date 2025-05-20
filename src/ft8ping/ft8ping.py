@@ -176,7 +176,12 @@ def transmit(
     log.info("PTT Disabled", cmd=cmd)
 
 
-@click.command()
+@click.group("ft8ping")
+def main():
+    pass
+
+
+@main.command()
 @click.option("--source", required=True, help="Source callsign, i.e. yours")
 @click.option("--destination", required=True, help="Destination callsign")
 @click.option(
@@ -196,7 +201,7 @@ def transmit(
     default="plughw:0,0",
     help="Audio device for radio input (see `aplay -l`)",
 )
-def main(source, destination, no_transmit, radio_model, radio_device, audio_device):
+def send(source, destination, no_transmit, radio_model, radio_device, audio_device):
     # TODO Make no-transmit skip other options? Or make them subcommands -
     # always need src/dest, but genaudio doesn't need more while tx needs devices
     packet = make_ping(source, destination)
@@ -214,6 +219,27 @@ def main(source, destination, no_transmit, radio_model, radio_device, audio_devi
     log.info("Transmitting")
     transmit(audio_filepath, radio_model, radio_device, audio_device)
     log.info("Transmitted!")
+
+
+@main.command("hashcodes")
+@click.argument("callsign")
+def hashcodes_command(callsign):
+    callsign = callsign.upper()
+    h = hashcodes(callsign)
+    print(f"Callsign: {callsign}")
+    print(f"h10: {h[0]}")
+    print(f"h12: {h[1]}")
+    print(f"h22: {h[2]}")
+    print(f"Biased for storage in c28: {h[3]}")
+
+
+@main.command("std_call_to_c28")
+@click.argument("callsign")
+def std_call_to_c28_command(callsign):
+    callsign = callsign.upper()
+    c28 = std_call_to_c28(callsign)
+    print(f"Callsign: {callsign}")
+    print(f"c28: {c28}")
 
 
 if __name__ == "__main__":  # pragma: no cover
