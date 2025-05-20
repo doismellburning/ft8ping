@@ -52,6 +52,18 @@ def test_main_no_transmit(fake_process):
     assert "packet" in result.output
 
 
+def test_hashcodes():
+    runner = CliRunner()
+
+    result = runner.invoke(
+        ft8ping.main,
+        "hashcodes 2E0KGG",
+    )
+
+    assert result.exit_code == 0, result.output
+    assert "2E0KGG" in result.output
+
+
 def test_packet_to_telemetry_hex():
     payload_int = 6  # Arbitrary value from a test run
     packet = ICMP(id=0x1CE0, seq=0x6CB8) / payload_int.to_bytes(1)

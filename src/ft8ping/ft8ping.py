@@ -221,5 +221,17 @@ def send(source, destination, no_transmit, radio_model, radio_device, audio_devi
     log.info("Transmitted!")
 
 
+@main.command("hashcodes")
+@click.argument("callsign")
+def hashcodes_command(callsign):
+    callsign = callsign.upper()
+    h = hashcodes(callsign)
+    print(f"Callsign: {callsign}")
+    print(f"h10: {h[0]}")
+    print(f"h12: {h[1]}")
+    print(f"h22: {h[2]}")
+    print(f"Biased for storage in c28: {h[3]}")
+
+
 if __name__ == "__main__":  # pragma: no cover
     main()
