@@ -176,7 +176,12 @@ def transmit(
     log.info("PTT Disabled", cmd=cmd)
 
 
-@click.command()
+@click.group("ft8ping")
+def main():
+    pass
+
+
+@main.command()
 @click.option("--source", required=True, help="Source callsign, i.e. yours")
 @click.option("--destination", required=True, help="Destination callsign")
 @click.option(
@@ -196,7 +201,7 @@ def transmit(
     default="plughw:0,0",
     help="Audio device for radio input (see `aplay -l`)",
 )
-def main(source, destination, no_transmit, radio_model, radio_device, audio_device):
+def send(source, destination, no_transmit, radio_model, radio_device, audio_device):
     # TODO Make no-transmit skip other options? Or make them subcommands -
     # always need src/dest, but genaudio doesn't need more while tx needs devices
     packet = make_ping(source, destination)
