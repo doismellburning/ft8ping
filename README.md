@@ -8,5 +8,5 @@ Because [when FT8 Telemetry messages give you 71 bits of arbitrary content, why 
 
 ```
 $ uv tool install --upgrade git+https://github.com/doismellburning/ft8ping
-$ ft8ping --source YOURCALL --destination THEIRCALL --radio-model 1 --radio-device /dev/radio --audio-device plughw:0,0
+$ ft8ping send --source YOURCALL --destination THEIRCALL --radio-model 1 --radio-device /dev/radio --audio-device plughw:0,0
 ```
