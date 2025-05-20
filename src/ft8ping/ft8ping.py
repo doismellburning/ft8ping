@@ -233,5 +233,14 @@ def hashcodes_command(callsign):
     print(f"Biased for storage in c28: {h[3]}")
 
 
+@main.command("std_call_to_c28")
+@click.argument("callsign")
+def std_call_to_c28_command(callsign):
+    callsign = callsign.upper()
+    c28 = std_call_to_c28(callsign)
+    print(f"Callsign: {callsign}")
+    print(f"c28: {c28}")
+
+
 if __name__ == "__main__":  # pragma: no cover
     main()
