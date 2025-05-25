@@ -92,6 +92,13 @@ def packet_to_telemetry_hex(packet: ICMP) -> str:
     return hex_string
 
 
+def telemetry_hex_to_packet(hs: str) -> ICMP:
+    h = int("0x" + hs, 16)
+    h = h << 1  # 71 bits representing the rightmost of 9 bytes (72 bits)
+    packet = ICMP(h.to_bytes(9))
+    return packet
+
+
 def make_audio(telemetry_hex: str) -> Path:
     tmpdir = tempfile.mkdtemp(prefix="ft8ping-")
 
