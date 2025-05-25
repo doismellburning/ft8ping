@@ -52,6 +52,18 @@ def test_main_no_transmit(fake_process):
     assert "packet" in result.output
 
 
+def test_packet_to_telemetry_hex_to_packet():
+    payload_int = 6
+    packet_in = ICMP(id=0x1, seq=0x2) / payload_int.to_bytes(1)
+
+    telemetry_hex = ft8ping.packet_to_telemetry_hex(packet_in)
+    packet_out = ft8ping.telemetry_hex_to_packet(telemetry_hex)
+
+    assert packet_out.id == packet_in.id
+    assert packet_out.seq == packet_in.seq
+    assert packet_out.payload == packet_in.payload
+
+
 def test_hashcodes():
     runner = CliRunner()
 
