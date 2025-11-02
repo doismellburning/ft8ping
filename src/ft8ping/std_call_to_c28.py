@@ -4,6 +4,8 @@ public domain software (per https://wsjt.sourceforge.io/FT4_FT8_QEX.pdf)
 from http://www.arrl.org/QEXfiles
 """
 
+import sys
+
 """
 Original source:
 
@@ -42,7 +44,6 @@ program std_call_to_c28
 
 
 def main():
-    import sys
 
     if len(sys.argv) != 2:
         print("Usage:   std_call_to_c28 <call_std>")

@@ -87,7 +87,7 @@ def packet_to_telemetry_hex(packet: ICMP) -> str:
     packet_as_int = int.from_bytes(packet_bytes, byteorder="big")
     shifted = packet_as_int >> 1
 
-    hex_string = hex(shifted)[2:]  # Remove leading "0x"
+    hex_string = f"{shifted:x}"
 
     return hex_string
 
